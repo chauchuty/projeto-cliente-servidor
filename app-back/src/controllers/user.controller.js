@@ -1,13 +1,12 @@
 import UserService from './../services/user.service.js'
 
-export function register(req, res) {
-    const { name, email, password } = req.body
-
-    UserService.create({ name: name, email: email, password: password })
-        .then(user => {
-            res.status(201).json(user)
+export function getUsers(req, res) {
+    UserService.getAll()
+        .then(users => {
+            res.status(200).json(users)
         })
         .catch(err => {
-            res.status(500).json({ message: err })
+            res.status(500).json({ message: 'Interval Server Error'})
         })
+    
 }

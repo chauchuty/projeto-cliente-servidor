@@ -1,29 +1,27 @@
 import express from 'express'
 import cors from 'cors'
 import env from './env.js'
-import { register } from './controllers/user.controller.js'
+import { login, signup, logout } from './controllers/app.controller.js'
+import { getUsers,  } from './controllers/user.controller.js'
+import { isAuth } from './middlewares/app.middleware.js'
 
 // Settings
 const app = express()
 app.use(cors())
 app.use(express.json())
 
-// Test
-
 
 // Middlewares
 
 
 // Routes
-app.get('/login', (req, res) => {
-    res.json({ test: '123' })
-})
+app.post('/login', login)
 
-app.get('/logout', (req, res) => {
+app.post('/signup', signup)
 
-})
+app.get('/logout', logout)
 
-app.post('/register', register)
+app.get('/users', isAuth, getUsers)
 
 // Listen
 
