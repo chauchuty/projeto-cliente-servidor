@@ -2,7 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import env from './env.js'
 import { login, signup, logout } from './controllers/app.controller.js'
-import { getUsers, getDataUser } from './controllers/user.controller.js'
+import { getUsers, getDataUser, updateUser } from './controllers/user.controller.js'
 import { isAuth } from './middlewares/app.middleware.js'
 import { getOcurrences } from './controllers/ocurrence.controller.js'
 
@@ -23,6 +23,8 @@ app.post('/signup', signup)
 app.get('/logout', logout)
 
 app.get('/users', isAuth, getUsers)
+
+app.put('/users', updateUser)
 
 app.get('/users/data', getDataUser)
 

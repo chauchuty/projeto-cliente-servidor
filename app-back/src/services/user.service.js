@@ -9,6 +9,10 @@ class UserService {
         })
     }
 
+    static async update(id, data){
+        return (await User.findByPk(id)).update(data)
+    }
+
     static async getOne(data) {
         return await User.findOne({
             where: {
