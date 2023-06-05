@@ -21,6 +21,14 @@ class UserService {
     static async getAll(){
         return await User.findAll()
     }
+
+    static async getData(id){
+        return await User.findOne({
+            where: {
+                id: id
+            }
+        })
+    }
 }
 
 export default UserService

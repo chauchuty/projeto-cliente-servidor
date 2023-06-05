@@ -2,8 +2,9 @@ import express from 'express'
 import cors from 'cors'
 import env from './env.js'
 import { login, signup, logout } from './controllers/app.controller.js'
-import { getUsers,  } from './controllers/user.controller.js'
+import { getUsers, getDataUser } from './controllers/user.controller.js'
 import { isAuth } from './middlewares/app.middleware.js'
+import { getOcurrences } from './controllers/ocurrence.controller.js'
 
 // Settings
 const app = express()
@@ -22,6 +23,10 @@ app.post('/signup', signup)
 app.get('/logout', logout)
 
 app.get('/users', isAuth, getUsers)
+
+app.get('/users/data', getDataUser)
+
+app.get('/ocurrences', getOcurrences)
 
 // Listen
 
