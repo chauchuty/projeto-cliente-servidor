@@ -1,7 +1,7 @@
 type Access = {
-    email: string;
-    password: string;
-    token?: string;
+    email: string
+    password: string
+    token?: string
 }
 
 export default Access

@@ -30,7 +30,7 @@ function HomePage() {
                                     <div className="col-lg-8 offset-lg-2">
                                         <div className="p-5">
                                             <div className="text-center">
-                                                <h1 className="h4 text-gray-900 mb-4">HOME PAGE!</h1>
+                                                <h1 className="h4 text-gray-900 mb-4">Ocorrências</h1>
                                                 <h3 className="mb-4">Você está autenticado!</h3>
                                                 <button onClick={onSubmit} className="btn btn-danger btn-block">
                                                     Sair

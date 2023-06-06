@@ -1,31 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom'
-import LoginPage from './pages/login.page'
-import SignupPage from './pages/signup.page';
-import HomePage from './pages/home.page';
+import { RouterProvider } from 'react-router-dom'
 import { AppContext } from './hooks/app.context';
 import Access from './types/access.model';
+import router from './routes/app.routes';
 
 // Routes
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Navigate to="/login" />
-  },
-  {
-    path: "/login",
-    element: <LoginPage />,
-  },
-  {
-    path: "/signup",
-    element: <SignupPage />
-  },
-  {
-    path: "/home",
-    element: <HomePage />
-  }
-]);
+
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

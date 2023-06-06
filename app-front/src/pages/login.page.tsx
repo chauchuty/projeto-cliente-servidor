@@ -2,20 +2,26 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom"
 import AppService from "../services/app.service";
 import Access from "../types/access.model";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "../hooks/app.context";
 
 function LoginPage() {
     const context = useContext<Access>(AppContext);
     const navigate = useNavigate();
-    const { register, handleSubmit, formState: { errors } } = useForm<Access>();
+    const { register, setValue, handleSubmit, formState: { errors } } = useForm<Access>();
+
+    useEffect(() => {
+        setValue('email', 'cesar@gmail.com')
+        setValue('password', '010203')
+    }, [])
 
     const onSubmit = (access: Access) => {
         AppService.login(access)
             .then(response => {
                 context.email = access.email
                 context.token = response.data.token
-                navigate("/home");
+                console.log(context)
+                navigate("/dashboard");
             })
             .catch(err => {
                 alert('Usuário ou senha inválido!')
