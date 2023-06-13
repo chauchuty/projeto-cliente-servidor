@@ -1,8 +1,8 @@
 type Ocurrence = {
     id?: number
-    registred_at: Date
+    registered_at: Date
     local: string
-    ocurrence_type: number
+    occurrence_type: number
     km: number
 }
 

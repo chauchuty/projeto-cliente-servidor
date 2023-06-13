@@ -10,11 +10,11 @@ export function login(req, res) {
     if (!isEmail(email) || isEmpty(password)) {
         return res.status(401).json({ message: 'Usuário ou senha são requeridos' })
     }
-
+    
     UserService.getOne({ email: email, password: password})
         .then(user => {
             const token = jwt.sign({ id: user.id }, env.jwt.secret)
-            res.status(201).json({ token: token })
+            res.status(201).json({ id: user.id, name: user.name, email: user.email, token: token })
         })
         .catch(err => {
             res.status(500).json({ message: 'Email ou senha inválido!' })
@@ -35,15 +35,14 @@ export function signup(req, res) {
 }
 
 export function logout(req, res) {
-    const token = req.headers.authorization
-
+    const token = req.headers.authorization.split(' ')[1]
+    
     if (!token) {
         return res.status(401).json({ message: 'Token requerido!' })
     }
 
     jwt.verify(token, env.jwt.secret, (err, _) => {
         if (err) {
-            console.log(token)
             return res.status(401).json({ message: 'Token inválido!' })
         }
 

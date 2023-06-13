@@ -4,7 +4,7 @@ import env from './env.js'
 import { login, signup, logout } from './controllers/app.controller.js'
 import { getUsers, getDataUser, updateUser } from './controllers/user.controller.js'
 import { isAuth } from './middlewares/app.middleware.js'
-import { getOcurrences } from './controllers/ocurrence.controller.js'
+import { getOcurrences } from './controllers/occurrence.controller.js'
 
 // Settings
 const app = express()
@@ -18,18 +18,19 @@ app.use(express.json())
 // Routes
 app.post('/login', login)
 
-app.post('/signup', signup)
+app.post('/users', signup)
 
-app.get('/logout', logout)
+app.post('/logout', logout)
 
 app.get('/users', isAuth, getUsers)
 
-app.put('/users', updateUser)
+app.put('/users/:id', updateUser)
 
 app.get('/users/data', getDataUser)
 
-app.get('/ocurrences', getOcurrences)
+app.get('/occurrences', getOcurrences)
 
+app.post('/occurences', )
 // Listen
 
 app.listen(env.server.port, () => {

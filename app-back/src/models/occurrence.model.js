@@ -4,7 +4,7 @@ import sequelize from '../database/sequelize.js'
 import env from './../env.js'
 import User from './user.model.js';
 
-const Ocurrence = sequelize.define("ocurrences", {
+const Occurrence = sequelize.define("occurrences", {
     registered_at: {
         type: DataTypes.DATE,
         allowNull: false
@@ -13,7 +13,7 @@ const Ocurrence = sequelize.define("ocurrences", {
         type: DataTypes.STRING,
         allowNull: false
     },
-    occurence_type: {
+    occurrence_type: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
@@ -31,11 +31,10 @@ const Ocurrence = sequelize.define("ocurrences", {
     }
 });
 
-Ocurrence.hasOne(User, { foreignKey: 'user_id',  });
-
+Occurrence.hasOne(User, { foreignKey: 'user_id',  });
 
 (async () => {
     await sequelize.sync({ force: env.db.sync });
 })();
 
-export default Ocurrence
+export default Occurrence

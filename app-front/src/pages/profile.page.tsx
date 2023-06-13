@@ -12,24 +12,16 @@ function ProfilePage() {
     const { register, setValue, handleSubmit, formState: { errors } } = useForm<User>()
 
     useEffect(() => {
-        UserService.getData(context.token || '')
-            .then(response => {
-                setValue('name', response.data.name)
-                setValue('email', response.data.email)
-                setValue('password', response.data.password)
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        setValue('name', context.name)
+        setValue('email', context.email)
+        setValue('password', context.password)
     }, [])
 
 
     const onSubmit = (user: User) => {
-        UserService.update(user, context.token || '')
+        console.log(user)
+        UserService.update(user, context.token || '', context.id || -1)
             .then(response => {
-                console.log(response.data)
-                alert(response.data.message)
-                context.email = response.data.user.email
                 navigate('/dashboard')
             })
             .catch(err => {
@@ -42,21 +34,21 @@ function ProfilePage() {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">Nome Completo</label>
-                    <input {...register("name", { required: true })} type="text" className="form-control" id="name" />
+                    <input {...register("name", { required: false })} type="text" className="form-control" id="name" />
                     {errors.name &&
                         <div className="form-text text-danger">Nome Completo é requerido!</div>
                     }
                 </div>
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email</label>
-                    <input {...register("email", { required: true })} type="email" className="form-control" id="email" />
+                    <input {...register("email", { required: false })} type="email" className="form-control" id="email" />
                     {errors.email &&
                         <div className="form-text text-danger">Email é requerido!</div>
                     }
                 </div>
                 <div className="mb-3">
                     <label htmlFor="password" className="form-label">Senha</label>
-                    <input {...register("password", { required: true })} type="text" className="form-control" id="password" />
+                    <input {...register("password", { required: false })} type="text" className="form-control" id="password" />
                     {errors.password &&
                         <div className="form-text text-danger">Senha é requerida!</div>
                     }

@@ -16,10 +16,13 @@ function LoginPage() {
     }, [])
 
     const onSubmit = (access: Access) => {
+        console.log(access)
         AppService.login(access)
             .then(response => {
-                context.email = access.email
-                context.token = response.data.token
+                context.id = response.data.id
+                context.name = response.data.name
+                context.email = response.data.email
+                context.token = 'Bearer ' + response.data.token
                 console.log(context)
                 navigate("/dashboard");
             })

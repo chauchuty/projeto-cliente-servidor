@@ -3,9 +3,10 @@ import LoginPage from "../pages/login.page";
 import SignupPage from "../pages/signup.page";
 import HomePage from "../pages/home.page";
 import DashboardPage from "../pages/dashboard.page";
-import OcurrencePages from "../pages/ocurrence.page";
+import OcurrencePages from "../pages/ocurrence/occurrence.page";
 import ProfilePage from "../pages/profile.page";
 import ProtectedRoute from "./protected.routes";
+import NewOcurrencePage from "../pages/ocurrence/new.ocurrence.page";
 
 const router = createBrowserRouter([
     {
@@ -34,6 +35,12 @@ const router = createBrowserRouter([
         path: "/ocurrences",
         element: <ProtectedRoute
             page={<OcurrencePages />}
+        />
+    },
+    {
+        path: "/ocurrences/:id",
+        element: <ProtectedRoute
+            page={<NewOcurrencePage />}
         />
     },
     {

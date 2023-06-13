@@ -14,22 +14,37 @@ export function getUsers(req, res) {
 
 export function updateUser(req, res) {
     const user = req.body
-    console.log(user)
-    const token = req.headers.authorization
-    
+    const token = req.headers.authorization.split(' ')[1]
     const data = jwt.decode(token, env.jwt.secret)
 
     if (!data) {
         return res.status(500).json({ message: 'Invalid' })
     }
 
-    UserService.update(data.id, user)
-        .then(user => {
-            res.status(200).json({user: user, message: 'Atualizado com sucesso!'})
+    UserService.getOneById(data.id)
+        .then(response => {
+            if (!user.password) {
+                user.password = response.dataValues.password
+            }
         })
         .catch(err => {
-            res.status(500).json({err: err})
+            return res.status(404).json({ message: 'User not found' })
         })
+        .finally(() => {
+            UserService.update(data.id, user)
+                .then(user => {
+
+                    res.status(200).json({
+                        ...user.dataValues,
+                        message: 'Atualizado com sucesso!'
+                    })
+                })
+                .catch(err => {
+                    res.status(500).json({ message: err.message })
+                })
+        })
+
+
 }
 
 export function getDataUser(req, res) {

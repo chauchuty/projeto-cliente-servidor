@@ -22,6 +22,14 @@ class UserService {
         })
     }
 
+    static async getOneById(id){
+        return await User.findOne({
+            where: {
+                id: id
+            }
+        })
+    }
+
     static async getAll(){
         return await User.findAll()
     }

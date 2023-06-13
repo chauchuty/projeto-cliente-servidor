@@ -1,14 +1,15 @@
 import axios from 'axios'
 import User from "../types/user.model";
+import env from '../env';
 
 class UserService {
 
     static async create(user: User){
-        return await axios.post('http://localhost:3000/signup', user)
+        return await axios.post(env.api.url + '/users', user)
     }
 
-    static async update(user: User, token: string){
-        return await axios.put('http://localhost:3000/users', {
+    static async update(user: User, token: string, id: number){
+        return await axios.put(env.api.url + '/users/'+ id, {
             ...user
         }, {
             headers: {
