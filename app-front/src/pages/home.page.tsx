@@ -9,7 +9,7 @@ function HomePage() {
 
     const onSubmit = () => {
         if (context.token) {
-            AppService.logout(context.token)
+            AppService.logout(context.token, context.id || -1)
                 .then(response => {
                     console.log(response.data)
                     alert('Desconecado com sucesso!')

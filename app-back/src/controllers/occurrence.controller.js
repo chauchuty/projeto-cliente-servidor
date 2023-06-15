@@ -1,4 +1,4 @@
-import OccurrenceService from "../services/occurrence.service"
+import OccurrenceService from "../services/occurrence.service.js"
 
 export function getOcurrences(req, res) {
     OccurrenceService.getAll()
@@ -11,5 +11,12 @@ export function getOcurrences(req, res) {
 }
 
 export function newOccurrences(req, res) {
-    res.status(200).json({ message: 'ok'})
+    const data = req.body
+    OccurrenceService.create(data)
+        .then(response => {
+            res.status(200).json({ message: 'Ocorrência cadastrada com sucesso!'})
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'Interval Server Error'})
+        })
 }

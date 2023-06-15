@@ -4,7 +4,7 @@ import env from './env.js'
 import { login, signup, logout } from './controllers/app.controller.js'
 import { getUsers, getDataUser, updateUser } from './controllers/user.controller.js'
 import { isAuth } from './middlewares/app.middleware.js'
-import { getOcurrences } from './controllers/occurrence.controller.js'
+import { getOcurrences, newOccurrences } from './controllers/occurrence.controller.js'
 
 // Settings
 const app = express()
@@ -30,7 +30,7 @@ app.get('/users/data', getDataUser)
 
 app.get('/occurrences', getOcurrences)
 
-app.post('/occurences', )
+app.post('/occurrences', newOccurrences)
 // Listen
 
 app.listen(env.server.port, () => {
