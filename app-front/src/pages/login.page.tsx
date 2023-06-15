@@ -16,7 +16,7 @@ function LoginPage() {
     }, [])
 
     const onSubmit = (access: Access) => {
-        console.log(access)
+
         AppService.login(access)
             .then(response => {
                 context.id = response.data.id

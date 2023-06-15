@@ -10,7 +10,6 @@ function SignupPage() {
   const onSubmit = (user: User) => {
     UserService.create(user)
       .then(response => {
-        console.log(response)
         alert("Cadastrado com sucesso!")
         navigate("/login")
       })

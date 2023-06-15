@@ -5,6 +5,7 @@ import env from "../env";
 class AppService {
 
     static async login(access: Access) {
+        access.password = btoa(access.password)
         return await axios.post(env.api.url + '/login', access)
     }
 

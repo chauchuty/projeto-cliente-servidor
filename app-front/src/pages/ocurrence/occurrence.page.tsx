@@ -23,16 +23,22 @@ function OcurrencePages() {
                     }
                 }))
             })
-            .catch(err => alert(err));
+            .catch(err => {
+                console.log(err.message)
+            });
     }, [])
 
     return (
         <LayoutComponent>
             <Link to="/ocurrences/new" className="btn btn-primary float-right">Nova ocorrência</Link>
-            <TableComponent dataSource={{
-                columns: ['#', 'Registrado em', 'Local', 'Tipo', 'Km', 'Usuário'],
-                rows: dataTable
-            }} />
+            {
+                dataTable.length > 0 && (
+                    <TableComponent dataSource={{
+                        columns: ['#', 'Registrado em', 'Local', 'Tipo', 'Km', 'Usuário'],
+                        rows: dataTable
+                    }} />
+                )
+            }
         </LayoutComponent>
     )
 }
