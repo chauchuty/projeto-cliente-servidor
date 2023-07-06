@@ -13,6 +13,14 @@ class UserService {
         return (await User.findByPk(id)).update(data)
     }
 
+    static async delete(id){
+        return await User.destroy({
+            where: {
+                id: id
+            }
+        })
+    }
+
     static async getOne(data) {
         return await User.findOne({
             where: {

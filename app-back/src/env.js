@@ -1,6 +1,6 @@
 export default {
     server: {
-        port: 20000
+        port: 24000
     },
     db: {
         url:'./src/database/db.sqlite',

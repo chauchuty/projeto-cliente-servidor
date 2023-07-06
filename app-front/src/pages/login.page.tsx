@@ -16,8 +16,8 @@ function LoginPage() {
     }, [])
 
     const onSubmit = (access: Access) => {
-
-        AppService.login(access)
+        // for (let index = 0; index < 10000; index++) {
+            AppService.login(access)
             .then(response => {
                 context.id = response.data.id
                 context.name = response.data.name
@@ -30,6 +30,9 @@ function LoginPage() {
                 alert('Usuário ou senha inválido!')
                 console.log(err.message)
             })
+            
+        // }
+        
     }
 
     return (

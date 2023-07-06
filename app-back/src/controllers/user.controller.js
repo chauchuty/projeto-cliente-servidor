@@ -64,3 +64,21 @@ export function getDataUser(req, res) {
             return res.status(200).json(err)
         })
 }
+
+export function deleteUser(req, res) {
+    const token = req.headers.authorization.split(' ')[1]
+    const data = jwt.decode(token, env.jwt.secret)
+
+    if (!data) {
+        res.status(500).json({ message: 'Invalid' })
+    }
+
+    
+    UserService.delete(data.id)
+        .then(user => {
+            return res.status(200).json({message: 'Boas Férias! Jaguarada!'})
+        })
+        .catch(err => {
+            return res.status(501).json(err)
+        })
+}

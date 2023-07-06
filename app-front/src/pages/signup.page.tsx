@@ -2,10 +2,17 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom"
 import User from "../types/user.model";
 import UserService from "../services/user.service";
+import { useEffect } from "react";
 
 function SignupPage() {
   const navigate = useNavigate()
-  const { register, handleSubmit, formState: { errors } } = useForm<User>();
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm<User>();
+
+  useEffect(() => {
+    setValue('name', 'Cesar Mauricio')
+    setValue('email', 'cesar@gmail.com')
+    setValue('password', '010203')
+  }, [])
 
   const onSubmit = (user: User) => {
     UserService.create(user)

@@ -7,6 +7,8 @@ import OcurrencePages from "../pages/ocurrence/occurrence.page";
 import ProfilePage from "../pages/profile.page";
 import ProtectedRoute from "./protected.routes";
 import NewOcurrencePage from "../pages/ocurrence/new.ocurrence.page";
+import MineOccurrence from "../pages/ocurrence/mine.occurrence.page";
+import EditOccurencePage from "../pages/ocurrence/edit.occurrence.page";
 
 const router = createBrowserRouter([
     {
@@ -38,9 +40,21 @@ const router = createBrowserRouter([
         />
     },
     {
-        path: "/ocurrences/:id",
+        path: "/ocurrences/new",
         element: <ProtectedRoute
             page={<NewOcurrencePage />}
+        />
+    },
+    {
+        path: "/ocurrences/edit",
+        element: <ProtectedRoute
+            page={<EditOccurencePage />}
+        />
+    },
+    {
+        path: "/mineocurrences",
+        element: <ProtectedRoute
+            page={<MineOccurrence />}
         />
     },
     {

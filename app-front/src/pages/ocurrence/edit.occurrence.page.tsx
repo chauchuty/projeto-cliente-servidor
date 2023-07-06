@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { AppContext } from "../../hooks/app.context";
 import Ocurrence from "../../types/ocurrence.model";
 import LayoutComponent from "../../components/layout/layout.component";
 import OccurrenceService from "../../services/occurrence.service";
 
-function NewOcurrencePage() {
+function EditOccurencePage() {
+    const [searchParams, setSearchParams] = useSearchParams();
     const context = useContext(AppContext)
     const currentDateTime = new Date().toISOString().slice(0, 16)
     const navigate = useNavigate()
@@ -14,6 +15,10 @@ function NewOcurrencePage() {
     const [options, setOptions] = useState([] as any[])
 
     useEffect(() => {
+        
+        setValue('local', searchParams.get('local') || '')
+        setValue('occurrence_type', Number(searchParams.get('occurrence_type')) || 1)
+        setValue('km', Number(searchParams.get('km')) || 1)
         setOptions([
             { value: '1', label: 'Atropelamento' },
             { value: '2', label: 'Deslizamento' },
@@ -30,21 +35,14 @@ function NewOcurrencePage() {
 
 
     const onSubmit = (data: any) => {
-        while(true){
-            setTimeout(() => {
-                OccurrenceService.create(data, context.token || '', context.id || -1)
-                .then(response => {
-                    console.log('Caiu')
-                    alert('Cadastrado com sucesso!')
-                    // navigate('/ocurrences')
-                })
-                .catch(err => {
-                    // alert('Erro ao cadastrar! \n' + err.response.data.message)
-                })
-            }, 300)
-            
-        }
-        
+        OccurrenceService.update(data, context.token || '', Number(searchParams.get('id')), context.id || -1)
+            .then(response => {
+                alert('Atualizado com sucesso!')
+                navigate('/ocurrences')
+            })
+            .catch(err => {
+                alert('Erro ao cadastrar! \n' + err.response.data.message)
+            })
     }
 
     return (
@@ -94,4 +92,4 @@ function NewOcurrencePage() {
     )
 }
 
-export default NewOcurrencePage
+export default EditOccurencePage

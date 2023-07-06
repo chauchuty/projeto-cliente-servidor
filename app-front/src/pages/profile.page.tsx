@@ -29,6 +29,21 @@ function ProfilePage() {
             })
     }
 
+    const onDelete = () => {
+        const op = confirm('Deseja realmente excluir sua conta?')
+
+        if (!op) return
+        console.log(context.token)
+        UserService.delete(context.token || '', context.id || -1)
+            .then(response => {
+                alert('Deletado com sucesso! Você será redirecionado!')
+                navigate('/login')
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
     return (
         <LayoutComponent>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -55,6 +70,7 @@ function ProfilePage() {
                 </div>
 
                 <button type="submit" className="btn btn-primary">Salvar</button>
+                <button onClick={onDelete} type="button" className="btn btn-danger ml-3">Delete</button>
             </form>
         </LayoutComponent>
     )

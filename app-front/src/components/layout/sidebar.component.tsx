@@ -29,6 +29,13 @@ function SidebarComponent() {
                     <span>Ocorrências</span>
                 </Link>
             </li>
+
+            <li className="nav-item">
+                <Link to="/mineocurrences" className="nav-link">
+                    <i className="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Minhas Ocorrências</span>
+                </Link>
+            </li>
         </ul>
     )
 }

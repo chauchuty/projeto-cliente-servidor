@@ -1,0 +1,50 @@
+import { useContext, useEffect, useState } from "react";
+import LayoutComponent from "../../components/layout/layout.component";
+import TableComponent from "../../components/shared/table.component";
+import OcurrenceService from "../../services/occurrence.service";
+import { Link } from "react-router-dom";
+import { AppContext } from "../../hooks/app.context";
+
+function MineOccurrence() {
+    const context = useContext(AppContext)
+    const [dataTable, setDataTable] = useState([])
+
+    useEffect(() => {
+        OcurrenceService.getAllById(context.token || '', context.id || 1)
+            .then((response) => {
+                console.log(response)
+                setDataTable(response.data.map((d: any) => {
+                    return {
+                        id: d.id,
+                        register_at: d.registered_at,
+                        local: d.local,
+                        ocurrence_type: d.occurrence_type,
+                        km: d.km,
+                        user_id: d.user_id
+                    }
+                }))
+            })
+            .catch(err => {
+                console.log(err.message)
+            });
+    }, [])
+
+    return (
+        <LayoutComponent>
+            <Link to="/ocurrences/new" className="btn btn-primary float-right">Nova ocorrência</Link>
+            {
+                dataTable.length > 0 && (
+                    <TableComponent
+                        dataSource={{
+                            columns: ['#', 'Registrado em', 'Local', 'Tipo', 'Km', 'Usuário', 'Editar'],
+                            rows: dataTable
+                        }}
+                        hasButton  
+                    />
+                )
+            }
+        </LayoutComponent>
+    )
+}
+
+export default MineOccurrence

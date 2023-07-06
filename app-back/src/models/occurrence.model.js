@@ -31,7 +31,7 @@ const Occurrence = sequelize.define("occurrences", {
     }
 });
 
-Occurrence.hasOne(User, { foreignKey: 'user_id',  });
+Occurrence.hasOne(User, { foreignKey: 'user_id', onDelete: 'cascade'  });
 
 (async () => {
     await sequelize.sync({ force: env.db.sync });

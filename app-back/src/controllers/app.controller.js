@@ -14,7 +14,7 @@ export function login(req, res) {
     UserService.getOne({ email: email, password: password})
         .then(user => {
             const token = jwt.sign({ id: user.id }, env.jwt.secret)
-            res.status(201).json({ id: user.id, name: user.name, email: user.email, token: token })
+            res.status(200).json({ id: user.id, name: user.name, email: user.email, token: token })
         })
         .catch(err => {
             res.status(500).json({ message: 'Email ou senha inválido!' })
